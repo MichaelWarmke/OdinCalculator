@@ -1,0 +1,21 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto, 4);
+    width: 240px;
+    height: 360px;
+    margin-left: 420px;
+}
+
+.OneByFour {
+    grid-column: 1 / 4;
+}
+
+.OneByTwo {
+    grid-column: 1 / 2; 
+}
+
+.gridItem {
+    background: grey;
+    border: 1px solid black;
+    padding: 5px 5px;
+}
