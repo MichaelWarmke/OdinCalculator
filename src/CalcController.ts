@@ -23,6 +23,7 @@ function createElement(object) {
     let element = document.createElement('div');
     element.classList.add(...getClassNames(object.rowSize));
     element.textContent = object.content;
+    addButtonEL(element);
     return element;
 }
 
@@ -30,12 +31,46 @@ function getClassNames(size) {
     console.log(size);
     switch(size) {
         case '4':
-            return ['OneByFour','gridItem'];
+            return ['OneByFour','gridItem','numberDisplay'];
         case '2':
-            return ['OneByTwo','gridItem'];
+            return ['OneByTwo','gridItem', 'button'];
         case '1':
-            return ['gridItem'];        
+            return ['gridItem', 'button'];        
     }
+}
+
+function refreshDisplay() {
+    let display = document.querySelector('.OneByFour');
+    display.textContent = getDisplayNumbers();
+}
+
+function addButtonEL(element) {
+    if (element.classList.contains('button')) {
+        element.addEventListener('mousedown', mouseDown);
+        element.addEventListener('mouseup', mouseUp);
+        element.addEventListener('mouseenter', mouseEnter);
+        element.addEventListener('mouseleave', mouseLeave);
+    }
+}
+
+function mouseDown(event) {
+    mouseLeave(event);
+    event.target.classList.add('buttonPress');
+}
+
+function mouseUp(event) {
+    mouseEnter(event);
+    event.target.classList.remove('buttonPress');
+    submitOption(event.target.textContent);
+    refreshDisplay();
+}
+
+function mouseEnter(event) {
+    event.target.classList.add('buttonHover');
+}
+
+function mouseLeave(event) {
+    event.target.classList.remove('buttonHover');
 }
 
 renderGrid();
