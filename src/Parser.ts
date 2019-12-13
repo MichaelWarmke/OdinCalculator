@@ -1,4 +1,3 @@
-
 let symbols = {
     '3' : ['(',')'],
     '2' : ['*','/'],
@@ -6,21 +5,31 @@ let symbols = {
 };
 
 function parseEquation(expression: string): string {
-    let lexedTree = lex(expression);
-    return "";
+    return '';   
 }
 
-function lex(expression) {
-    getAllSymbols().reduce((lexedExpression, lexor) => {
-        return lexedExpression.
-    }, [`${expression}`]);
+function containsAllSymbol(partialEquationString: string): boolean {
+    getAllSymbols().forEach(symbol => {
+        if (containsSymbol(symbol, partialEquationString))
+            return true;
+    });
+    return false;
 }
 
-function getAllSymbols(): Array<String> {
+function containsSymbol( symbol: string, partialEquationString: string): boolean {
+    return partialEquationString.search(symbol) != -1
+}
+
+
+function getAllSymbols(): Array<string> {
     return Object.keys(symbols)
     .map(key => symbols[key])
     .reduce((endArray, symArray) => {
         return endArray.push(...symArray);
     },[]);
+}
+
+module.exports = {
+    parseEquation: parseEquation
 }
 

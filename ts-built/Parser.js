@@ -24,10 +24,17 @@ var symbols = {
     '1': ['+', '-']
 };
 function parseEquation(expression) {
-    var lexedTree = lex(expression);
-    return "";
+    return '';
 }
-function lex(expression) {
+function containsAllSymbol(partialEquationString) {
+    getAllSymbols().forEach(function (symbol) {
+        if (containsSymbol(symbol, partialEquationString))
+            return true;
+    });
+    return false;
+}
+function containsSymbol(symbol, partialEquationString) {
+    return partialEquationString.search(symbol) != -1;
 }
 function getAllSymbols() {
     return Object.keys(symbols)
@@ -36,3 +43,6 @@ function getAllSymbols() {
         return endArray.push.apply(endArray, __spread(symArray));
     }, []);
 }
+module.exports = {
+    parseEquation: parseEquation
+};

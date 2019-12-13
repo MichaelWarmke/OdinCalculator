@@ -2,8 +2,12 @@ var displayNumbers = '0';
 function getDisplayNumbers() {
     return displayNumbers;
 }
-function evalEquation() {
-    return parseEquation(displayNumbers);
+function tryEvalEquation(equation) {
+    var equationSlices = equation.split('+');
+    var args = equationSlices
+        .filter(function (equationSlice) { return containsAllSymbol(equation); })
+        .map(function (slice) { return tryEvalEquation(slice); });
+    return operate('+', parseInt(args[0]), parseInt(args[1]));
 }
 function submitOption(option) {
     console.log("option submitted: " + option);
@@ -12,7 +16,7 @@ function submitOption(option) {
             displayNumbers = '0';
         }
         else if (option == '=') {
-            displayNumbers = evalEquation();
+            displayNumbers = tryEvalEquation(displayNumbers);
         }
         else {
             displayNumbers = displayNumbers.concat(option);
@@ -24,16 +28,16 @@ function submitOption(option) {
 function operate(symbol, arg1, arg2) {
     switch (symbol) {
         case "+":
-            add(arg1, arg2);
+            return add(arg1, arg2).toString();
             break;
         case "-":
-            sub(arg1, arg2);
+            return sub(arg1, arg2).toString();
             break;
         case "/":
-            div(arg1, arg2);
+            return div(arg1, arg2).toString();
             break;
         case "*":
-            multi(arg1, arg2);
+            return multi(arg1, arg2).toString();
             break;
         default:
             console.log('Unsupprted Operation.');
@@ -51,3 +55,6 @@ function div(numOne, numTwo) {
 function multi(numOne, numTwo) {
     return numOne * numTwo;
 }
+module.exports = {
+    tryEvalEquation: tryEvalEquation
+};

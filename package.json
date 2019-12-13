@@ -1,0 +1,28 @@
+{
+  "name": "mikes-calc",
+  "version": "1.0.0",
+  "description": "odin calculator project",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.12.17",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  },
+  "scripts": {
+    "test": "tsc ; mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelWarmke/OdinCalculator.git"
+  },
+  "author": "michael warmke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelWarmke/OdinCalculator/issues"
+  },
+  "homepage": "https://github.com/MichaelWarmke/OdinCalculator#readme"
+}
